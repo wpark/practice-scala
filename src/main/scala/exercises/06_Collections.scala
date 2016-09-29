@@ -130,7 +130,8 @@ object Collections {
    * neat way using recursion. 
    */
   def tails[T](l: List[T]): List[List[T]] = {
-    error("fix me")
+    if(l.length == 0) {List(l)}
+    else {l::tails(l.tail)}
   }
   
   /**
@@ -162,7 +163,8 @@ object Collections {
    * method above
    */
   def sumOfMany(l: List[Int]*): List[Int] = {
-    error("fix me")
+    val newList:List[Int] = List()
+    l.foldLeft(newList)(sumOfTwo)
   }
 
   case class Person(age: Int, firstName: String, lastName: String)
@@ -172,31 +174,12 @@ object Collections {
    * The idea is to rewrite the method into more functional style. 
    */
   def separateTheYoungFromTheOld(persons: List[Person]): List[List[String]] = {
-    var youngins: ListBuffer[Person] = new ListBuffer[Person]()
-    var elders: ListBuffer[Person] = new ListBuffer[Person]()
-    var validYoungNames: ListBuffer[String] = new ListBuffer[String]()
-    var validOldNames: ListBuffer[String] = new ListBuffer[String]()
-
-    for (person <- persons) {
-        if (person.age < 18) {
-          youngins += person
-        } else {
-          elders += person
-        }
-    }
-
-    var sortedYoung = youngins.toList.sortBy(_.age)
-    var sortedOld = elders.toList.sortBy(_.age)
-
-    for (young <- sortedYoung) {
-      validYoungNames += young.firstName
-    }
-    for (old <- sortedOld) {
-      validOldNames += old.firstName
-    }
+     var youngins = persons.filter(_.age < 18)
+     var elders = persons.filter(_.age >= 18)
     
-    List(validYoungNames.toList, validOldNames.toList)
+      List (youngins.sortBy(_.age).map(_.firstName), elders.sortBy(_.age).map(_.firstName))
   }
+
 }
 
 
