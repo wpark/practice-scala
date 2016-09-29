@@ -31,14 +31,14 @@ object Collections {
    * 
    */
   def firstElementInList[T](l: List[T]): T = {
-    error("fix me")
+    l.head
   }
 
   /**
    * Get the sum of all the elements in the list, e.g. sumOfList(List(1,2,3)) = 6.
    */
   def sumOfList(l: List[Int]): Int = {
-    error("fix me")
+    l.sum
   }
 
   /**
@@ -51,7 +51,7 @@ object Collections {
    *  - ... etc
    */
   def lastElementInList[T](l: List[T]): T = {
-    error("fix me")
+    l.last
   }
 
    /**
@@ -65,7 +65,7 @@ object Collections {
    *  - ... etc
    */
   def nthElementInList[T](n: Int, l: List[T]): T = {
-    error("fix me")
+    l(n)
   }
 
   /**
@@ -79,7 +79,7 @@ object Collections {
    *  - ... etc 
    */
   def concatLists[T](l1: List[T], l2: List[T]): List[T] = {
-    error("fix me")
+    List.concat(l1,l2)
   }
 
   /**
@@ -92,7 +92,7 @@ object Collections {
    * 
    */
   def sortList[T <% Ordered[T]](list: List[T]): List[T] = {
-    error("fix me")
+    list.sorted
   }
 
   /**
@@ -103,7 +103,7 @@ object Collections {
    * to implement in your own free-style way.
    */
   def elementExists[T](l: List[T], e: T): Boolean = {
-    error("fix me")
+    l.contains(e)
   }
 
   /**
@@ -114,7 +114,7 @@ object Collections {
    * pattern match or some other method.
    */
   def oddElements(iList: List[Int]): List[Int] = {
-    error("fix me")
+    iList.filter( (i:Int) => i%2 != 0)
   }
 
   /**
@@ -139,7 +139,7 @@ object Collections {
    * As usual, various ways exist: pattern matching, folding, ...
    */
   def maxElementInList(l: List[Int]): Int = {
-    error("fix me")
+    l.max
   }
 
   /**
@@ -147,7 +147,14 @@ object Collections {
    * of the two list
    */
   def sumOfTwo(l1: List[Int], l2: List[Int]): List[Int] = {
-    error("fix me")
+    if (l1.length == 0) {l2}
+    else if (l2.length == 0) {l1}
+    else {
+      val twoHeads:Int = l1.head + l2.head
+      val newL1:List[Int] = l1.drop(1)
+      val newL2:List[Int] = l2.drop(1)
+      twoHeads::sumOfTwo(newL1, newL2)
+    }
   }
 
   /**
